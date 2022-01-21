@@ -1,10 +1,11 @@
-// ignore_for_file: file_names, prefer_const_constructors, avoid_print
+// ignore_for_file: file_names, prefer_const_constructors, avoid_print, implementation_imports
 
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'extras/Languages.dart';
 import 'package:translator/translator.dart';
 
 class SpeechScreen extends StatefulWidget {
@@ -75,12 +76,13 @@ class _SpeechScreenState extends State<SpeechScreen> {
                     value: secondValue,
                     dropdownColor: Colors.black,
                     style: TextStyle(color: Colors.white),
-                    items: ["en","fr","es","it","hi", "ja"]
-                        .map((String value) {
+                    items:
+                        // ["en", "fr", "es", "it", "hi", "ja"]
+                        langs.entries.map((e) {
                       return DropdownMenuItem(
-                        child:
-                            Text(value, style: TextStyle(color: Colors.white)),
-                        value: value,
+                        child: Text("${e.value}(${e.key.toUpperCase()})",
+                            style: TextStyle(color: Colors.white)),
+                        value: e.key,
                       );
                     }).toList(),
                     onChanged: (String? value) async {
