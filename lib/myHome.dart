@@ -21,10 +21,12 @@ class _SpeechScreenState extends State<SpeechScreen> {
   String text = "Press to start speaking";
 
   _speak() async {
-    await flutterTts.setLanguage("en-US");
+    await flutterTts.setLanguage("en-GB");
     await flutterTts.setPitch(1);
+    //List<dynamic> engines = await flutterTts.getLanguages;
     await flutterTts.getEngines;
     await flutterTts.speak(translatedText);
+    //print(engines.toString());
   }
 
   void initSpeech() async {
@@ -75,7 +77,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
                     value: secondValue,
                     dropdownColor: Colors.black,
                     style: TextStyle(color: Colors.white),
-                    items: ["en","fr","es","it","hi", "ja"]
+                    items: ["en", "fr", "es", "it", "hi", "ja"]
                         .map((String value) {
                       return DropdownMenuItem(
                         child:
@@ -116,7 +118,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
                           from: chosenValue, to: secondValue);
                       setState(() {
                         translatedText = trans.text;
-                        _speak();
+                        //_speak();
                         chosenValue = secondValue;
                       });
                     },
