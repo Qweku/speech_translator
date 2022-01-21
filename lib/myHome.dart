@@ -58,7 +58,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: Colors.grey[900],
-            title: Text('Voice Translator'),
+            title: Text('Speech Translator'),
             centerTitle: true,
           ),
           body: Stack(
@@ -124,7 +124,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
                             from: chosenValue, to: secondValue);
                         setState(() {
                           translatedText = trans.text;
-                          _speak();
+                          //_speak();
                           chosenValue = secondValue;
                         });
                       },
