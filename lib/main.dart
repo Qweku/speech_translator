@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:speech_translator/launcher.dart';
 
 import 'myHome.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SpeechScreen(),
+      home: const Launcher(),
     );
   }
 }
