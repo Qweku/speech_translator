@@ -193,12 +193,13 @@ class _SpeechScreenState extends State<SpeechScreen> {
     return (await showDialog<bool>(
             context: context,
             builder: (c) => AlertDialog(
+                  backgroundColor: Colors.grey[900],
                   title: Center(
                       child: Text(
-                    "Warning",
+                    "Warning",style:TextStyle(color:Colors.red)
                   )),
                   content: Text(
-                    "Do you really want to quit?",
+                    "Do you really want to quit?",style:TextStyle(color:Colors.white)
                   ),
                   actions: [
                     TextButton(
@@ -206,12 +207,12 @@ class _SpeechScreenState extends State<SpeechScreen> {
                           exit(0);
                         },
                         child: Text(
-                          "Yes",
+                          "Yes",style:TextStyle(color:Colors.red)
                         )),
                     TextButton(
                         onPressed: () => Navigator.pop(c, false),
                         child: Text(
-                          "No",
+                          "No",style:TextStyle(color:Colors.red)
                         ))
                   ],
                 ))) ??
