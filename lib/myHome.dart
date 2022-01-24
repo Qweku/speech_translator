@@ -74,7 +74,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
                     clipper: NewCustomClipper(),
                     child: Container(
                       color: Colors.red,
-                      height: height * 0.47,
+                      height: height * 0.48,
                       child: SingleChildScrollView(
                         child: Container(
                             padding: EdgeInsets.all(20),
@@ -93,40 +93,9 @@ class _SpeechScreenState extends State<SpeechScreen> {
                     ),
                   ),
                  
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal:height*0.02),
-                    decoration: BoxDecoration(
-                      borderRadius:BorderRadius.circular(20),
-                      color:Colors.white
-                    ),
-                    child: DropdownButton(
-                      iconEnabledColor: Colors.black,
-                        underline: DropdownButtonHideUnderline(child: Container()),
-                        value: secondValue,
-                        //dropdownColor: Colors.black,
-                        style: TextStyle(color: Colors.black),
-                        items:
-                            // ["en", "fr", "es", "it", "hi", "ja"]
-                            langs.entries.map((e) {
-                          return DropdownMenuItem(
-                            child: Text("${e.value}(${e.key.toUpperCase()})",
-                                style: TextStyle(color: Colors.black)),
-                            value: e.key,
-                          );
-                        }).toList(),
-                        onChanged: (String? value) async {
-                          //translatedText = text;
-                          // var trans = await translator.translate(translatedText,
-                          secondValue = value
-                              .toString(); //     from: chosenValue, to: value.toString());
-                          setState(() {
-                            //translatedText = trans.text;
-                            //chosenValue = value.toString();
-                          });
-                        }),
-                  ),
+                  
                   SizedBox(
-                    height: height * 0.33,
+                    height: height * 0.3,
                     child: SingleChildScrollView(
                       child: Container(
                           padding: EdgeInsets.all(20),
@@ -177,6 +146,42 @@ class _SpeechScreenState extends State<SpeechScreen> {
                     )
                   ]),
                 ),
+              ),
+              Container(
+                alignment: Alignment(0,-0.2),
+                child:                  Container(
+                    padding: EdgeInsets.symmetric(horizontal:height*0.02),
+                    decoration: BoxDecoration(
+                      borderRadius:BorderRadius.circular(20),
+                      color:Colors.white
+                    ),
+                    child: DropdownButton(
+                      iconEnabledColor: Colors.black,
+                        underline: DropdownButtonHideUnderline(child: Container()),
+                        value: secondValue,
+                        //dropdownColor: Colors.black,
+                        style: TextStyle(color: Colors.black),
+                        items:
+                            // ["en", "fr", "es", "it", "hi", "ja"]
+                            langs.entries.map((e) {
+                          return DropdownMenuItem(
+                            child: Text("${e.value}(${e.key.toUpperCase()})",
+                                style: TextStyle(color: Colors.black)),
+                            value: e.key,
+                          );
+                        }).toList(),
+                        onChanged: (String? value) async {
+                          //translatedText = text;
+                          // var trans = await translator.translate(translatedText,
+                          secondValue = value
+                              .toString(); //     from: chosenValue, to: value.toString());
+                          setState(() {
+                            //translatedText = trans.text;
+                            //chosenValue = value.toString();
+                          });
+                        }),
+                  ),
+                 
               )
             ],
           )),
