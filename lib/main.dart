@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'speech_translator',
       theme: ThemeData(
+        fontFamily: 'Quicksand',
         primarySwatch: Colors.blue,
       ),
       home: const Launcher(),

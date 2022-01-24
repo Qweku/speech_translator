@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:speech_translator/extras/customClipper.dart';
+import 'package:speech_translator/extras/textField.dart';
 import 'extras/Languages.dart';
 import 'package:translator/translator.dart';
 
@@ -21,7 +23,8 @@ class _SpeechScreenState extends State<SpeechScreen> {
   stt.SpeechToText _speech = stt.SpeechToText();
   FlutterTts flutterTts = FlutterTts();
   bool isListening = false;
-  String text = "Press to start speaking";
+  //String text = "Press to start speaking";
+  TextEditingController textController = TextEditingController();
 
   _speak() async {
     await flutterTts.setLanguage("en-US");
@@ -44,7 +47,8 @@ class _SpeechScreenState extends State<SpeechScreen> {
   void initState() {
     super.initState();
     initSpeech();
-    translatedText = text;
+    textController.text = "Press to start speaking or type here";
+    translatedText = textController.text;
   }
 
   @override
@@ -53,68 +57,88 @@ class _SpeechScreenState extends State<SpeechScreen> {
     return WillPopScope(
       onWillPop: () => _onBackPressed(context),
       child: Scaffold(
-        
+        resizeToAvoidBottomInset: false,
           backgroundColor: Colors.grey[900],
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: Colors.grey[900],
+            backgroundColor: Colors.red,
             title: Text('Speech Translator'),
+            elevation: 0,
             centerTitle: true,
           ),
           body: Stack(
             children: [
               Column(
                 children: [
-                  SizedBox(
-                    height: height * 0.4,
-                    child: SingleChildScrollView(
-                      child: Container(
-                          padding: EdgeInsets.all(20),
-                          child: Text(text,
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white))),
+                  ClipPath(
+                    clipper: NewCustomClipper(),
+                    child: Container(
+                      color: Colors.red,
+                      height: height * 0.47,
+                      child: SingleChildScrollView(
+                        child: Container(
+                            padding: EdgeInsets.all(20),
+                            child: CustomTextField(
+                              //borderColor: Colors.white,
+                              maxLines: 10,
+                              textAlign: TextAlign.center,
+                              controller: textController,
+                              style: TextStyle(fontSize: 20, color: Colors.white)
+                            )
+                            // Text(text,
+                            //     style:
+                            //         TextStyle(fontSize: 20, color: Colors.white))
+                            ),
+                      ),
                     ),
                   ),
-                  Divider(
-                    color: Colors.grey,
+                 
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal:height*0.02),
+                    decoration: BoxDecoration(
+                      borderRadius:BorderRadius.circular(20),
+                      color:Colors.white
+                    ),
+                    child: DropdownButton(
+                      iconEnabledColor: Colors.black,
+                        underline: DropdownButtonHideUnderline(child: Container()),
+                        value: secondValue,
+                        //dropdownColor: Colors.black,
+                        style: TextStyle(color: Colors.black),
+                        items:
+                            // ["en", "fr", "es", "it", "hi", "ja"]
+                            langs.entries.map((e) {
+                          return DropdownMenuItem(
+                            child: Text("${e.value}(${e.key.toUpperCase()})",
+                                style: TextStyle(color: Colors.black)),
+                            value: e.key,
+                          );
+                        }).toList(),
+                        onChanged: (String? value) async {
+                          //translatedText = text;
+                          // var trans = await translator.translate(translatedText,
+                          secondValue = value
+                              .toString(); //     from: chosenValue, to: value.toString());
+                          setState(() {
+                            //translatedText = trans.text;
+                            //chosenValue = value.toString();
+                          });
+                        }),
                   ),
-                  DropdownButton(
-                      value: secondValue,
-                      dropdownColor: Colors.black,
-                      style: TextStyle(color: Colors.white),
-                      items:
-                          // ["en", "fr", "es", "it", "hi", "ja"]
-                          langs.entries.map((e) {
-                        return DropdownMenuItem(
-                          child: Text("${e.value}(${e.key.toUpperCase()})",
-                              style: TextStyle(color: Colors.white)),
-                          value: e.key,
-                        );
-                      }).toList(),
-                      onChanged: (String? value) async {
-                        //translatedText = text;
-                        // var trans = await translator.translate(translatedText,
-                        secondValue = value
-                            .toString(); //     from: chosenValue, to: value.toString());
-                        setState(() {
-                          //translatedText = trans.text;
-                          //chosenValue = value.toString();
-                        });
-                      }),
                   SizedBox(
-                    height: height * 0.3,
+                    height: height * 0.33,
                     child: SingleChildScrollView(
                       child: Container(
                           padding: EdgeInsets.all(20),
                           child: Text(translatedText,
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white))),
+                              style: TextStyle(
+                                  fontSize: 20, color: Colors.white))),
                     ),
                   ),
                 ],
               ),
               Container(
-                alignment: Alignment(1, 1.1),
+                alignment: Alignment(1.1, 1.3),
                 child: SizedBox(
                   height: height * 0.3,
                   child: Column(children: [
@@ -138,7 +162,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
                     AvatarGlow(
                       animate: isListening,
                       glowColor: Colors.red,
-                      endRadius: 75.0,
+                      endRadius: 60.0,
                       duration: Duration(milliseconds: 2000),
                       repeatPauseDuration: Duration(milliseconds: 100),
                       repeat: true,
@@ -159,33 +183,35 @@ class _SpeechScreenState extends State<SpeechScreen> {
     );
   }
 
-   Future<bool> _onBackPressed(BuildContext context) async {
+  Future<bool> _onBackPressed(BuildContext context) async {
     final theme = Theme.of(context);
     return (await showDialog<bool>(
             context: context,
             builder: (c) => AlertDialog(
-                  
                   title: Center(
-                      child: Text("Warning",
-                          )),
-                  content: Text("Do you really want to quit?",
-                      ),
+                      child: Text(
+                    "Warning",
+                  )),
+                  content: Text(
+                    "Do you really want to quit?",
+                  ),
                   actions: [
                     TextButton(
                         onPressed: () {
                           exit(0);
                         },
-                        child: Text("Yes",
-                            )),
+                        child: Text(
+                          "Yes",
+                        )),
                     TextButton(
                         onPressed: () => Navigator.pop(c, false),
-                        child: Text("No",
-                            ))
+                        child: Text(
+                          "No",
+                        ))
                   ],
                 ))) ??
         false;
   }
-
 
   void listen() async {
     await _speech.listen(onResult: _onSpeechResult);
@@ -201,8 +227,8 @@ class _SpeechScreenState extends State<SpeechScreen> {
 
   void _onSpeechResult(SpeechRecognitionResult result) {
     setState(() {
-      text = result.recognizedWords;
-      translatedText = text;
+      textController.text = result.recognizedWords;
+      translatedText = textController.text;
     });
   }
 
