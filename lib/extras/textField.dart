@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final TextAlign textAlign;
+  final ValueChanged<String>? onChanged;
   final Color hintColor;
   const CustomTextField(
       {Key? key,
@@ -26,7 +27,7 @@ class CustomTextField extends StatelessWidget {
       this.suffixIcon,
       this.textAlign = TextAlign.justify,
       this.hintColor = Colors.grey,
-      this.prefixIcon})
+      this.prefixIcon, this.onChanged})
       : super(key: key);
 
   @override
@@ -47,6 +48,7 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         textAlign: textAlign,
         style: style,
+        onChanged: onChanged,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(color: hintColor),

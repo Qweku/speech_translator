@@ -39,6 +39,8 @@ dependencies:
   flutter_tts:
   flutter_translate:
   translator:
+  flutter_riverpod: 
+  google_mobile_ads: ^2.0.0
 
 dev_dependencies:
   flutter_test:
