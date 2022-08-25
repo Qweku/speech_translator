@@ -1,28 +1,19 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:speech_translator/launcher.dart';
 
-
 List<String> testDeviceIds = ["37616A164D7CF31F7DC8708FE683E91C"];
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
 
+  // RequestConfiguration configuration =
+  //      RequestConfiguration(testDeviceIds: testDeviceIds);
+  // MobileAds.instance.updateRequestConfiguration(configuration);
 
-  RequestConfiguration configuration =
-       RequestConfiguration(testDeviceIds: testDeviceIds);
-  MobileAds.instance.updateRequestConfiguration(configuration);
-  
-  runApp(
-     const MyApp());
+  runApp(const MyApp());
 }
-
-
-
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -32,8 +23,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
-   @override
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _initGoogleMobileAds();
+  //     RequestConfiguration configuration =
+  //      RequestConfiguration(testDeviceIds: testDeviceIds);
+  // MobileAds.instance.updateRequestConfiguration(configuration);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -46,5 +46,10 @@ class _MyAppState extends State<MyApp> {
       ),
       home: const Launcher(),
     );
+  }
+
+  Future<InitializationStatus> _initGoogleMobileAds() {
+    // TODO: Initialize Google Mobile Ads SDK
+    return MobileAds.instance.initialize();
   }
 }
