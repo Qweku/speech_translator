@@ -17,7 +17,7 @@ Speech Translator App is a cross-platform mobile application developed using Flu
 
 ## Links
 - [Flutter](https://flutter.dev/)
-- [GitHub Repository](https://github.com/yourusername/SpeechTranslatorApp)
+- [GitHub Repository](https://github.com/Qweku/speech_translator)
 
 ## Screenshots
 ![Screenshot 1](screenshots/screenshot1.png)
@@ -35,7 +35,7 @@ Speech Translator App is a cross-platform mobile application developed using Flu
 - [Jeffrey Boahen](https://github.com/yellow_Flickr)
 
 ## Getting Started
-1. Clone the repository `git clone https://github.com/yourusername/SpeechTranslatorApp.git`
+1. Clone the repository `git clone https://github.com/Qweku/speech_translator.git`
 2. Navigate to the project directory
 3. Run `flutter pub get` to install dependencies
 4. Ensure internet connectivity for translation services
