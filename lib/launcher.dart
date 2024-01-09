@@ -3,7 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:speech_translator/myHome.dart';
+import 'package:speech_translate/myHome.dart';
 
 
 

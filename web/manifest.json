@@ -1,6 +1,6 @@
 {
-    "name": "speech_translator",
-    "short_name": "speech_translator",
+    "name": "speech_translate",
+    "short_name": "speech_translate",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

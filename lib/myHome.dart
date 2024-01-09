@@ -9,8 +9,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
-import 'package:speech_translator/extras/customClipper.dart';
-import 'package:speech_translator/extras/textField.dart';
+import 'package:speech_translate/extras/customClipper.dart';
+import 'package:speech_translate/extras/textField.dart';
 
 import 'extras/Languages.dart';
 import 'package:translator/translator.dart';
@@ -135,9 +135,9 @@ class _SpeechScreenState extends State<SpeechScreen> {
                     ? AvatarGlow(
                         animate: isListening,
                         glowColor: theme.primaryColor,
-                        endRadius: 60.0,
+                        //  glowBorderRadius: BorderRadius.circular(60),
                         duration: Duration(milliseconds: 2000),
-                        repeatPauseDuration: Duration(milliseconds: 100),
+                       
                         repeat: true,
                         child: GestureDetector(
                           onTap: isListening ? listen : _stopListen,

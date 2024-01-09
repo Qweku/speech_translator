@@ -1,4 +1,4 @@
-package com.example.speech_translator
+package com.example.speech_translate
 
 import io.flutter.embedding.android.FlutterActivity
 
