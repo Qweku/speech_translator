@@ -20,9 +20,10 @@ Speech Translator App is a cross-platform mobile application developed using Flu
 - [GitHub Repository](https://github.com/Qweku/speech_translator)
 
 ## Screenshots
-![Screenshot 1](readme/s1.jpg)
-![Screenshot 2](readme/s2.jpg)
-![Screenshot 3](readme/s3.jpg)
+| Screenshot 1 | Screenshot 2 | Screenshot 3 | 
+|-------------|------------------|------------------|
+| ![Screenshot 1](readme/s1.jpg) | ![Screenshot 2](readme/s2.jpg)
+| ![Screenshot 3](readme/s3.jpg) |
 
 ## Major Packages Used
 - `speech_to_text`: Speech recognition for converting speech to text
